@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "SearchInput":"../../components/SearchInput/SearchInput"
+  },
+  "navigationBarTitleText": "浩雅首页"
+}

@@ -1,0 +1,49 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/category/index",
+    "pages/cart/index",
+    "pages/mine/index",
+    "pages/search/index",
+    "pages/goods_list/index",
+    "pages/goods_detail/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#eb4450",
+    "navigationBarTitleText": "浩雅商城",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#ff2d4a",    
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "icons/tabar1_normal.png",
+        "selectedIconPath": "icons/tabar1_selected.png"
+      },
+      {
+        "pagePath": "pages/category/index",
+        "text": "分类",
+        "iconPath": "icons/tabar2_normal.png",
+        "selectedIconPath": "icons/tabar2_selected.png"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "购物车",
+        "iconPath": "icons/tabar3_normal.png",
+        "selectedIconPath": "icons/tabar3_selected.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "icons/tabar4_normal.png",
+        "selectedIconPath": "icons/tabar4_selected.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
