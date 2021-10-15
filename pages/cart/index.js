@@ -9,12 +9,27 @@
  *   3 假设 用户 从来没有调用过 收货地址的api
  *      scope undefined 直接调用 获取收货地址
  *   4 获取到的地址，放入本地缓存
+ * 2 页面加载完毕
+ *  0 onLoad  onShow
+ *  1 获取本地存储中的地址数据
+ *  2 把数据 设置给data中的一个变量
  */
 
 import {getSetting, chooseAddress, openSetting} from "../../utils/asyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 
 Page({
+  data:{
+    address:{}
+  },
+
+  onShow(){
+    const address=wx.getStorageSync('address');
+    this.setData({
+      address
+    });
+  },
+
   //点击收货地址
   async handleChooseAddress(){     
     try {
@@ -26,10 +41,11 @@ Page({
         await openSetting();
       }
       // 3 调用获取收货地址的api
-      const address=await chooseAddress();
+      let address=await chooseAddress();
+      address.all=address.provinceName+address.cityName+address.countyName+address.detailInfo;
       wx.setStorageSync('address', address);
     } catch (error) {
       console.log(error);
     }   
-  }
+  },
 })
