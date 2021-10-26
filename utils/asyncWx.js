@@ -43,3 +43,43 @@ export const openSetting=()=>{
     });
   })
 }
+
+/**
+ * promise 形式 showModal
+ * @param {object} content 
+ * @returns 
+ */
+export const showModal=({content})=>{
+  return new Promise((resolve,reject)=>{
+    wx.showModal({
+      title: '提示',
+      content: content,
+      success:(res) => {
+        resolve(res);
+      },
+      fail:(err)=> {
+        reject(err);
+      }
+    });
+  })
+}
+
+/**
+ * promise 形式 showToast
+ * @param {object} title 
+ * @returns 
+ */
+ export const showToast=({title})=>{
+  return new Promise((resolve,reject)=>{
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      success:(res) => {
+        resolve(res);
+      },
+      fail:(err)=> {
+        reject(err);
+      }
+    });
+  })
+}

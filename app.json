@@ -6,7 +6,8 @@
     "pages/mine/index",
     "pages/search/index",
     "pages/goods_list/index",
-    "pages/goods_detail/index"
+    "pages/goods_detail/index",
+    "pages/pay/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
