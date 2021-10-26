@@ -11,7 +11,9 @@
   *  3 支付按钮
   *   1 先判断缓存中有无token
   *   2 没有 跳转到授权页 进行获取token
-  *   3 创建订单
+  *   3 创建订单 获取订单编号
+  *   4 完成支付
+  *   5 手动删除缓存中已经选中了的商品
   */
  import {getSetting, chooseAddress, openSetting,showModal,showToast, requestPayment} from "../../utils/asyncWx.js";
  import regeneratorRuntime from '../../lib/runtime/runtime';
@@ -75,6 +77,10 @@
       // 查询后台 订单状态
       const res=await request({url:"/my/orders/chkOrder",data:{order_number},method:"POST",header});
       await showToast({title:"支付成功"});
+      let newCart=wx.getStorageSync('cart');
+      newCart=newCart.filter(v=>!v.checked);
+      wx.setStorageSync('cart', newCart);
+
       // 支付成功 跳转到订单页面
       wx.navigateTo({
         url: '/pages/order/index',
