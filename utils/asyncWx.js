@@ -83,3 +83,40 @@ export const showModal=({content})=>{
     });
   })
 }
+
+/**
+ * promise 形式 login
+ */
+ export const login=()=>{
+  return new Promise((resolve,reject)=>{
+    wx.login({
+      timeout:10000,
+      success: function(res){
+        resolve(res);
+      },
+      fail: function(err) {
+        reject(err);
+      }
+    });
+  })
+}
+
+/**
+ * promise 形式 requestPayment
+ * @param {object} pay 支付所必要的参数
+ */
+ export const requestPayment=(pay)=>{
+  return new Promise((resolve,reject)=>{
+    wx.requestPayment({
+      ...pay,
+      success: function(res){
+        // success
+        resolve(res);
+      },
+      fail: function(err) {
+        // fail
+        reject(err);
+      }
+    })
+  })
+}

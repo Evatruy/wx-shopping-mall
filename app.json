@@ -7,7 +7,9 @@
     "pages/search/index",
     "pages/goods_list/index",
     "pages/goods_detail/index",
-    "pages/pay/index"
+    "pages/pay/index",
+    "pages/auth/index",
+    "pages/order/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
