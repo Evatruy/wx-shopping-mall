@@ -57,7 +57,6 @@
         })
         return;
       }
-      const header={Authorization:token};
       const order_price=this.data.totalPrice;
       const consignee_addr= this.data.address.all;
       const cart=this.data.cart;
@@ -69,13 +68,13 @@
       }));
       const orderParams={order_price,consignee_addr,goods};
       // 发送请求 创建订单 获取订单编号
-      const {order_number}=await request({url:"/my/orders/create",method:"POST",data:orderParams,header});
+      const {order_number}=await request({url:"/my/orders/create",method:"POST",data:orderParams});
       // 准备发起 预支付接口
-      const {pay} = await request({url:"/my/orders/req_unifiedorder",data:{order_number},method:"POST",header});
+      const {pay} = await request({url:"/my/orders/req_unifiedorder",data:{order_number},method:"POST"});
       // 发起微信支付
       await requestPayment(pay);
       // 查询后台 订单状态
-      const res=await request({url:"/my/orders/chkOrder",data:{order_number},method:"POST",header});
+      const res=await request({url:"/my/orders/chkOrder",data:{order_number},method:"POST"});
       await showToast({title:"支付成功"});
       let newCart=wx.getStorageSync('cart');
       newCart=newCart.filter(v=>!v.checked);
