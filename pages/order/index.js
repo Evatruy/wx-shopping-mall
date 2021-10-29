@@ -1,4 +1,14 @@
-// pages/order/index.js
+/**
+ * 1 页面被打开的时候 onshow
+ *  0 onShow 不同于onLoad 无法在形参上接受参数
+ *  0.5 判断缓存中有没有token
+ *  1 获取url上的参数
+ *  2 根据type去发送请求获取数据
+ *  3 渲染页面
+ * 2 点击不同的标题 重新发送请求来获取和渲染数据
+ */
+ import {request} from "../../request/index";
+ import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
     tabs:[
@@ -25,11 +35,26 @@ Page({
     ]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onShow(options){
+    const token = wx.getStorageSync('token');
+    if(!token){
+      wx.navigateTo({
+        url: '/pages/auth/index'
+      });
+      return;
+    }
+    // 1 获取当前的小程序的页面栈-数组 长度最大是10页面
+    let pages = getCurrentPages();
+    let currentPage=pages[pages.length-1];
+    const {type}=currentPage.options;
+    this.getOrders(type);
+  },
+  // 获取订单列表
+  async getOrders(type){
+    const res=await request({url:"/my/orders/all",data:{type}});
+    this.setData({
+      orders:res.orders
+    });
   },
 
   //标题点击事件 从子组件传递过来
