@@ -12,7 +12,7 @@ Page({
       const {code}=await login();
       const loginParams={encryptedData,rawData,iv,signature,code};
       // 发送请求 获取用户token
-      const {token} = await request({url:"/users/wxlogin",data:loginParams,method:"post"});
+      const res = await request({url:"/users/wxlogin",data:loginParams,method:"post"});
       wx.setStorageSync('token', token);
       await showToast({title:"授权成功"});
       wx.navigateBack({

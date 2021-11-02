@@ -3,6 +3,7 @@
  *  0 onShow 不同于onLoad 无法在形参上接受参数
  *  0.5 判断缓存中有没有token
  *  1 获取url上的参数
+ *  2 根据type来决定页面标题谁被选中
  *  2 根据type去发送请求获取数据
  *  3 渲染页面
  * 2 点击不同的标题 重新发送请求来获取和渲染数据
@@ -36,7 +37,7 @@ Page({
   },
 
   onShow(options){
-    const token = wx.getStorageSync('token');
+    const token = wx.getStorageSync('token')||'111';
     if(!token){
       wx.navigateTo({
         url: '/pages/auth/index'
@@ -47,6 +48,7 @@ Page({
     let pages = getCurrentPages();
     let currentPage=pages[pages.length-1];
     const {type}=currentPage.options;
+    this.changeTitleByIndex(type-1);
     this.getOrders(type);
   },
   // 获取订单列表
@@ -57,10 +59,8 @@ Page({
     });
   },
 
-  //标题点击事件 从子组件传递过来
-  handleTabsItemChange(e){
-    // 1 获取被点击的标题索引
-    const {index}=e.detail;
+  //根据标题索引来激活选中 标题数组
+  changeTitleByIndex(index){
     // 2 修改源数组
     let {tabs}=this.data;
     tabs.forEach((v,i)=>i===index?v.isActive=true:v.isActive=false);
@@ -68,6 +68,14 @@ Page({
     this.setData({
       tabs
     })
+  },
+
+  handleTabsItemChange(e){
+    // 1 获取被点击的标题索引
+    const {index}=e.detail;
+    this.changeTitleByIndex(index);
+    // 重新发送请求 type=1 index=0
+    this.getOrders(index+1);
   },
 
   /**
