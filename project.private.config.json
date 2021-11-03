@@ -65,6 +65,12 @@
           "pathName": "pages/order/index",
           "query": "type=1",
           "scene": null
+        },
+        {
+          "name": "搜索中心",
+          "pathName": "pages/search/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
