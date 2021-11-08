@@ -13,6 +13,11 @@
                 <button>+</button>
             </view>
         </view>
-        <view class="form_btn_wrap"></view>
+        <view class="form_btn_wrap">
+            <button type="warn">
+                <icon type="success_no_circle" size="20" color="white"></icon>
+                提交
+            </button>
+        </view>
     </view>
 </Tabs>
